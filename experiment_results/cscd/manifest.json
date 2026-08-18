@@ -1,0 +1,88 @@
+{
+  "features": [
+    "m_ratio",
+    "m_delta",
+    "m_elp",
+    "m_symdiff",
+    "m_manfredini",
+    "m_dd",
+    "received_power",
+    "CN0"
+  ],
+  "train": {
+    "cs": {
+      "rows": 23677,
+      "channel": 0
+    },
+    "cd": {
+      "rows": 21799,
+      "channel": 4
+    }
+  },
+  "test": [
+    {
+      "scenario": "ds1",
+      "start": 0,
+      "rows": 22203,
+      "onset_s": 125.0,
+      "type": "static",
+      "channel": 0
+    },
+    {
+      "scenario": "ds2",
+      "start": 22203,
+      "rows": 22528,
+      "onset_s": 110.0,
+      "type": "static",
+      "channel": 3
+    },
+    {
+      "scenario": "ds3",
+      "start": 44731,
+      "rows": 22563,
+      "onset_s": 120.0,
+      "type": "static",
+      "channel": 3
+    },
+    {
+      "scenario": "ds4",
+      "start": 67294,
+      "rows": 22579,
+      "onset_s": 114.0,
+      "type": "static",
+      "channel": 0
+    },
+    {
+      "scenario": "ds5",
+      "start": 89873,
+      "rows": 20569,
+      "onset_s": 102.0,
+      "type": "dynamic",
+      "channel": 3
+    },
+    {
+      "scenario": "ds6",
+      "start": 110442,
+      "rows": 20577,
+      "onset_s": 105.0,
+      "type": "dynamic",
+      "channel": 4
+    },
+    {
+      "scenario": "ds7",
+      "start": 131019,
+      "rows": 23169,
+      "onset_s": 110.0,
+      "type": "static",
+      "channel": 3
+    },
+    {
+      "scenario": "ds8",
+      "start": 154188,
+      "rows": 22611,
+      "onset_s": 110.0,
+      "type": "static",
+      "channel": 3
+    }
+  ]
+}

@@ -184,18 +184,31 @@ class Exp_Anomaly_Detection(Exp_Basic):
         threshold = np.percentile(train_energy, 100 - self.args.anomaly_ratio)
         print("Threshold (train-only):", threshold)
 
+        # [GNSS 实验适配] 保存原始分数/标签/判决/阈值，供统一评估脚本使用。
+        # 阈值口径对齐 Paper A（Iqbal 2024）：在训练（清洁）分数上按目标
+        # FPR ∈ {0.1%, 1%, 5%} 标定三档阈值；threshold.npy 保留 FPR1% 档（等价
+        # anomaly_ratio=1 的 99 分位），thresholds.npy 为三档全量。
+        thresholds = {
+            0.1: float(np.percentile(train_energy, 99.9)),
+            1.0: float(np.percentile(train_energy, 99.0)),
+            5.0: float(np.percentile(train_energy, 95.0)),
+        }
+        print("Clean-calibrated thresholds (FPR 0.1/1/5%):",
+              {k: round(v, 6) for k, v in thresholds.items()})
+
         # (3) evaluation on the test set
         pred = (test_energy > threshold).astype(int)
         test_labels = np.concatenate(test_labels, axis=0).reshape(-1)
         test_labels = np.array(test_labels)
         gt = test_labels.astype(int)
 
-        # [GNSS 实验适配] 保存原始分数/标签/判决/阈值，供统一评估脚本使用
         np.save(folder_path + "score.npy", test_energy)
         np.save(folder_path + "label.npy", gt)
         np.save(folder_path + "pred_raw.npy", pred)
-        np.save(folder_path + "threshold.npy", np.asarray([threshold]))
-        print("saved score/label/pred_raw/threshold ->", folder_path)
+        np.save(folder_path + "threshold.npy", np.asarray([thresholds[1.0]]))
+        np.save(folder_path + "thresholds.npy",
+                np.asarray([thresholds[0.1], thresholds[1.0], thresholds[5.0]]))
+        print("saved score/label/pred_raw/threshold/thresholds ->", folder_path)
 
         print("pred:   ", pred.shape)
         print("gt:     ", gt.shape)
