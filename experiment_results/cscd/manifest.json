@@ -49,7 +49,7 @@
       "start": 67294,
       "rows": 22579,
       "onset_s": 114.0,
-      "type": "static",
+      "type": "dynamic",
       "channel": 0
     },
     {
@@ -65,7 +65,7 @@
       "start": 110442,
       "rows": 20577,
       "onset_s": 105.0,
-      "type": "dynamic",
+      "type": "static",
       "channel": 4
     },
     {

@@ -40,14 +40,13 @@ ATTACK_ONSET_S = {
     "ds8": 110.0,
 }
 
-# 场景分组（TEXBAT 官方定义，经 docs/ 原始文档复核）：
-#   - Humphreys et al. 2012 ION GNSS（tbION_for_distribution.pdf）Table I：
-#     场景 1-4 = Static、场景 5-6 = Dynamic（基于 cleanDynamic(cd)）
-#   - Lemmenes et al. 2016（LemmenesGNSSpaper.pdf）："six using a static antenna and
-#     two using a moving antenna"；其 Table 1（static scenario offsets）含 1/2/3/4/7/8
-# 静态：ds1~ds4、ds7、ds8（基于 cleanStatic cs）；动态：ds5、ds6（基于 cleanDynamic cd）
-STATIC_SCENARIOS = ["ds1", "ds2", "ds3", "ds4", "ds7", "ds8"]
-DYNAMIC_SCENARIOS = ["ds5", "ds6"]
+# 场景分组（本地 dsN = TEXBAT 官方 ds(N+1)；分组依 Paper A Table 2：
+#   DS-2/DS-5 = simple（DS-2 用 cleanStatic、DS-5 用 cleanDynamic 生成），
+#   DS-3/DS-4/DS-6 = intermediate（DS-6 动态），
+#   DS-7 = sophisticated（静态，载波对齐+匹配功率））
+# 官方动态 = DS-5/DS-6 → 本地 ds4/ds5；其余欺骗场景静态。
+STATIC_SCENARIOS = ["ds1", "ds2", "ds3", "ds6", "ds7", "ds8"]
+DYNAMIC_SCENARIOS = ["ds4", "ds5"]
 SCENARIO_TRAIN = {s: "cs" for s in STATIC_SCENARIOS}
 SCENARIO_TRAIN.update({s: "cd" for s in DYNAMIC_SCENARIOS})
 
