@@ -1,0 +1,2 @@
+n_frames,roc_auc,pr_auc,tpr@fpr1,tpr@fpr5,f1,mcc,bal_acc,tpr,fpr,add_s,hit,threshold
+22660,0.6533,0.8436,0.0588,0.1697,0.0315,0.0637,0.5079,0.016,0.0002,0.66,1,1.2762

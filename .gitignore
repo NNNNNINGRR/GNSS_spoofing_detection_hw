@@ -17,3 +17,7 @@ dataset/
 .DS_Store
 *.key
 *_key
+
+# 实验结果显示（仅结果，不含数据/权重）
+!experiment_results/
+!experiment_results/**

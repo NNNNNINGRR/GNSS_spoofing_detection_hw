@@ -1,0 +1,112 @@
+########## V1: from scratch ##########
+===== V1 Bi_FI ds1 (onset=125) =====
+{'n_frames': 22660, 'roc_auc': 0.6533, 'pr_auc': 0.8436, 'tpr@fpr1': 0.0588, 'tpr@fpr5': 0.1697, 'f1': 0.0315, 'mcc': 0.0637, 'bal_acc': 0.5079, 'tpr': np.float64(0.016), 'fpr': np.float64(0.0002), 'add_s': 0.66, 'hit': 1, 'threshold': 1.2762}
+===== V1 Bi_FI ds2 (onset=110) =====
+{'n_frames': 22428, 'roc_auc': 0.6021, 'pr_auc': 0.8547, 'tpr@fpr1': 0.1467, 'tpr@fpr5': 0.2045, 'f1': 0.1855, 'mcc': 0.1578, 'bal_acc': 0.5509, 'tpr': np.float64(0.1023), 'fpr': np.float64(0.0004), 'add_s': 0.18, 'hit': 1, 'threshold': 1.2745}
+===== V1 Bi_FI ds3 (onset=120) =====
+{'n_frames': 22464, 'roc_auc': 0.585, 'pr_auc': 0.8123, 'tpr@fpr1': 0.0374, 'tpr@fpr5': 0.109, 'f1': 0.024, 'mcc': 0.0495, 'bal_acc': 0.5055, 'tpr': np.float64(0.0121), 'fpr': np.float64(0.0011), 'add_s': 65.62, 'hit': 1, 'threshold': 1.2746}
+===== V1 Bi_FI ds4 (onset=114) =====
+{'n_frames': 22481, 'roc_auc': 0.6746, 'pr_auc': 0.8762, 'tpr@fpr1': 0.1109, 'tpr@fpr5': 0.2229, 'f1': 0.0759, 'mcc': 0.095, 'bal_acc': 0.5193, 'tpr': np.float64(0.0395), 'fpr': np.float64(0.0009), 'add_s': 151.18, 'hit': 1, 'threshold': 1.2732}
+===== V1 Bi_FI ds5 (onset=102) =====
+{'n_frames': 20478, 'roc_auc': 0.4878, 'pr_auc': 0.7943, 'tpr@fpr1': 0.0591, 'tpr@fpr5': 0.1071, 'f1': 0.0569, 'mcc': 0.0771, 'bal_acc': 0.5138, 'tpr': np.float64(0.0293), 'fpr': np.float64(0.0017), 'add_s': 0.28, 'hit': 1, 'threshold': 1.3281}
+===== V1 Bi_FI ds6 (onset=105) =====
+{'n_frames': 20487, 'roc_auc': 0.4363, 'pr_auc': 0.7301, 'tpr@fpr1': 0.0106, 'tpr@fpr5': 0.0343, 'f1': 0.0061, 'mcc': 0.0097, 'bal_acc': 0.5006, 'tpr': np.float64(0.0031), 'fpr': np.float64(0.0019), 'add_s': 73.31, 'hit': 1, 'threshold': 1.329}
+===== V1 Bi_FI ds7 (onset=110) =====
+{'n_frames': 23076, 'roc_auc': 0.6553, 'pr_auc': 0.8699, 'tpr@fpr1': 0.0677, 'tpr@fpr5': 0.1809, 'f1': 0.0645, 'mcc': 0.0787, 'bal_acc': 0.5153, 'tpr': np.float64(0.0333), 'fpr': np.float64(0.0028), 'add_s': 305.84, 'hit': 1, 'threshold': 1.2729}
+===== V1 Bi_FI ds8 (onset=110) =====
+{'n_frames': 23074, 'roc_auc': 0.6708, 'pr_auc': 0.8754, 'tpr@fpr1': 0.0768, 'tpr@fpr5': 0.1864, 'f1': 0.0573, 'mcc': 0.073, 'bal_acc': 0.5134, 'tpr': np.float64(0.0295), 'fpr': np.float64(0.0028), 'add_s': 153.34, 'hit': 1, 'threshold': 1.2731}
+===== V1 LightTS ds1 (onset=125) =====
+{'n_frames': 22660, 'roc_auc': 0.9503, 'pr_auc': 0.9821, 'tpr@fpr1': 0.5805, 'tpr@fpr5': 0.7842, 'f1': 0.6434, 'mcc': 0.4305, 'bal_acc': 0.7355, 'tpr': np.float64(0.475), 'fpr': np.float64(0.0039), 'add_s': 0.66, 'hit': 1, 'threshold': 1.7265}
+===== V1 LightTS ds2 (onset=110) =====
+{'n_frames': 22428, 'roc_auc': 0.756, 'pr_auc': 0.9077, 'tpr@fpr1': 0.137, 'tpr@fpr5': 0.2624, 'f1': 0.1901, 'mcc': 0.1514, 'bal_acc': 0.5498, 'tpr': np.float64(0.1052), 'fpr': np.float64(0.0055), 'add_s': 0.18, 'hit': 1, 'threshold': 1.7265}
+===== V1 LightTS ds3 (onset=120) =====
+{'n_frames': 22464, 'roc_auc': 0.6194, 'pr_auc': 0.8222, 'tpr@fpr1': 0.0368, 'tpr@fpr5': 0.1175, 'f1': 0.0532, 'mcc': 0.0597, 'bal_acc': 0.5102, 'tpr': np.float64(0.0274), 'fpr': np.float64(0.007), 'add_s': 64.02, 'hit': 1, 'threshold': 1.7265}
+===== V1 LightTS ds4 (onset=114) =====
+{'n_frames': 22481, 'roc_auc': 0.7315, 'pr_auc': 0.8932, 'tpr@fpr1': 0.1203, 'tpr@fpr5': 0.243, 'f1': 0.157, 'mcc': 0.1371, 'bal_acc': 0.5403, 'tpr': np.float64(0.0853), 'fpr': np.float64(0.0047), 'add_s': 8.48, 'hit': 1, 'threshold': 1.7265}
+===== V1 LightTS ds5 (onset=102) =====
+{'n_frames': 20478, 'roc_auc': 0.5338, 'pr_auc': 0.7813, 'tpr@fpr1': 0.0123, 'tpr@fpr5': 0.0471, 'f1': 0.0164, 'mcc': 0.0078, 'bal_acc': 0.5008, 'tpr': np.float64(0.0083), 'fpr': np.float64(0.0066), 'add_s': 0.28, 'hit': 1, 'threshold': 1.947}
+===== V1 LightTS ds6 (onset=105) =====
+{'n_frames': 20487, 'roc_auc': 0.4641, 'pr_auc': 0.7366, 'tpr@fpr1': 0.008, 'tpr@fpr5': 0.0282, 'f1': 0.0127, 'mcc': -0.0045, 'bal_acc': 0.4996, 'tpr': np.float64(0.0064), 'fpr': np.float64(0.0073), 'add_s': 72.53, 'hit': 1, 'threshold': 1.947}
+===== V1 LightTS ds7 (onset=110) =====
+{'n_frames': 23076, 'roc_auc': 0.6622, 'pr_auc': 0.8714, 'tpr@fpr1': 0.0794, 'tpr@fpr5': 0.172, 'f1': 0.1613, 'mcc': 0.1217, 'bal_acc': 0.5378, 'tpr': np.float64(0.088), 'fpr': np.float64(0.0124), 'add_s': 20.28, 'hit': 1, 'threshold': 1.7265}
+===== V1 LightTS ds8 (onset=110) =====
+{'n_frames': 23074, 'roc_auc': 0.7321, 'pr_auc': 0.8993, 'tpr@fpr1': 0.092, 'tpr@fpr5': 0.2332, 'f1': 0.1816, 'mcc': 0.134, 'bal_acc': 0.5441, 'tpr': np.float64(0.1002), 'fpr': np.float64(0.012), 'add_s': 9.34, 'hit': 1, 'threshold': 1.7265}
+===== V1 DLinear ds1 (onset=125) =====
+{'n_frames': 22660, 'roc_auc': 0.9985, 'pr_auc': 0.9996, 'tpr@fpr1': 0.9941, 'tpr@fpr5': 0.9958, 'f1': 0.0, 'mcc': 0.0, 'bal_acc': 0.5, 'tpr': np.float64(0.0), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 1.2977}
+===== V1 DLinear ds2 (onset=110) =====
+{'n_frames': 22428, 'roc_auc': 0.9909, 'pr_auc': 0.9975, 'tpr@fpr1': 0.9254, 'tpr@fpr5': 0.9672, 'f1': 0.0, 'mcc': 0.0, 'bal_acc': 0.5, 'tpr': np.float64(0.0), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 1.2977}
+===== V1 DLinear ds3 (onset=120) =====
+{'n_frames': 22464, 'roc_auc': 0.8102, 'pr_auc': 0.9309, 'tpr@fpr1': 0.2792, 'tpr@fpr5': 0.4346, 'f1': 0.0, 'mcc': 0.0, 'bal_acc': 0.5, 'tpr': np.float64(0.0), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 1.2977}
+===== V1 DLinear ds4 (onset=114) =====
+{'n_frames': 22481, 'roc_auc': 0.9539, 'pr_auc': 0.9856, 'tpr@fpr1': 0.6378, 'tpr@fpr5': 0.7979, 'f1': 0.0, 'mcc': 0.0, 'bal_acc': 0.5, 'tpr': np.float64(0.0), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 1.2977}
+===== V1 DLinear ds5 (onset=102) =====
+{'n_frames': 20478, 'roc_auc': 0.9988, 'pr_auc': 0.9997, 'tpr@fpr1': 0.997, 'tpr@fpr5': 0.9976, 'f1': 0.0, 'mcc': 0.0, 'bal_acc': 0.5, 'tpr': np.float64(0.0), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 1.4847}
+===== V1 DLinear ds6 (onset=105) =====
+{'n_frames': 20487, 'roc_auc': 0.982, 'pr_auc': 0.994, 'tpr@fpr1': 0.7097, 'tpr@fpr5': 0.9361, 'f1': 0.0, 'mcc': 0.0, 'bal_acc': 0.5, 'tpr': np.float64(0.0), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 1.4847}
+===== V1 DLinear ds7 (onset=110) =====
+{'n_frames': 23076, 'roc_auc': 0.8124, 'pr_auc': 0.9389, 'tpr@fpr1': 0.2411, 'tpr@fpr5': 0.4276, 'f1': 0.0, 'mcc': 0.0, 'bal_acc': 0.5, 'tpr': np.float64(0.0), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 1.2977}
+===== V1 DLinear ds8 (onset=110) =====
+{'n_frames': 23074, 'roc_auc': 0.9018, 'pr_auc': 0.9727, 'tpr@fpr1': 0.5898, 'tpr@fpr5': 0.705, 'f1': 0.0, 'mcc': 0.0, 'bal_acc': 0.5, 'tpr': np.float64(0.0), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 1.2977}
+########## V2: pretrain + finetune ##########
+===== V2 pretrain Bi_FI ETTh1 =====
+ckpt1: /root/autodl-tmp/exp_gnss/weights/anomaly_detection_full_pre_Bi_FI_ETTh1_Bi_FI_PSM_ftM_sl96_ll48_pl96_dm64_nh8_el2_dl1_df128_expand2_dc4_fc1_ebtimeF_dtTrue_FullPre_0/checkpoint.pth
+===== V2 pretrain Bi_FI ETTm1 =====
+ckpt2: /root/autodl-tmp/exp_gnss/weights/anomaly_detection_full_pre_Bi_FI_ETTm1_Bi_FI_PSM_ftM_sl96_ll48_pl96_dm64_nh8_el2_dl1_df128_expand2_dc4_fc1_ebtimeF_dtTrue_FullPre_0/checkpoint.pth
+===== V2 finetune Bi_FI ds1 (onset=125) =====
+{'n_frames': 22660, 'roc_auc': 0.6492, 'pr_auc': 0.8429, 'tpr@fpr1': 0.0636, 'tpr@fpr5': 0.1663, 'f1': 0.0032, 'mcc': 0.0203, 'bal_acc': 0.5008, 'tpr': np.float64(0.0016), 'fpr': np.float64(0.0), 'add_s': 0.66, 'hit': 1, 'threshold': 1.2024}
+===== V2 finetune Bi_FI ds2 (onset=110) =====
+{'n_frames': 22428, 'roc_auc': 0.594, 'pr_auc': 0.848, 'tpr@fpr1': 0.1147, 'tpr@fpr5': 0.1859, 'f1': 0.0296, 'mcc': 0.0587, 'bal_acc': 0.5075, 'tpr': np.float64(0.015), 'fpr': np.float64(0.0), 'add_s': 0.18, 'hit': 1, 'threshold': 1.2024}
+===== V2 finetune Bi_FI ds3 (onset=120) =====
+{'n_frames': 22464, 'roc_auc': 0.5893, 'pr_auc': 0.8172, 'tpr@fpr1': 0.0474, 'tpr@fpr5': 0.1259, 'f1': 0.0022, 'mcc': 0.0137, 'bal_acc': 0.5005, 'tpr': np.float64(0.0011), 'fpr': np.float64(0.0002), 'add_s': 67.88, 'hit': 1, 'threshold': 1.2026}
+===== V2 finetune Bi_FI ds4 (onset=114) =====
+{'n_frames': 22481, 'roc_auc': 0.6781, 'pr_auc': 0.8781, 'tpr@fpr1': 0.1085, 'tpr@fpr5': 0.2329, 'f1': 0.008, 'mcc': 0.0307, 'bal_acc': 0.502, 'tpr': np.float64(0.004), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 1.202}
+===== V2 finetune Bi_FI ds5 (onset=102) =====
+{'n_frames': 20478, 'roc_auc': 0.4616, 'pr_auc': 0.7723, 'tpr@fpr1': 0.027, 'tpr@fpr5': 0.0794, 'f1': 0.0005, 'mcc': 0.0076, 'bal_acc': 0.5001, 'tpr': np.float64(0.0003), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 1.2536}
+===== V2 finetune Bi_FI ds6 (onset=105) =====
+{'n_frames': 20487, 'roc_auc': 0.4223, 'pr_auc': 0.7242, 'tpr@fpr1': 0.0067, 'tpr@fpr5': 0.0364, 'f1': 0.0001, 'mcc': 0.0039, 'bal_acc': 0.5, 'tpr': np.float64(0.0001), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 1.2529}
+===== V2 finetune Bi_FI ds7 (onset=110) =====
+{'n_frames': 23076, 'roc_auc': 0.6435, 'pr_auc': 0.8652, 'tpr@fpr1': 0.0663, 'tpr@fpr5': 0.1745, 'f1': 0.0026, 'mcc': 0.0168, 'bal_acc': 0.5006, 'tpr': np.float64(0.0013), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 1.2018}
+===== V2 finetune Bi_FI ds8 (onset=110) =====
+{'n_frames': 23074, 'roc_auc': 0.6664, 'pr_auc': 0.8752, 'tpr@fpr1': 0.0751, 'tpr@fpr5': 0.1918, 'f1': 0.001, 'mcc': 0.0105, 'bal_acc': 0.5003, 'tpr': np.float64(0.0005), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 1.2018}
+===== V2 pretrain LightTS ETTh1 =====
+ckpt1: /root/autodl-tmp/exp_gnss/weights/anomaly_detection_full_pre_LightTS_ETTh1_LightTS_PSM_ftM_sl96_ll48_pl96_dm64_nh8_el2_dl1_df128_expand2_dc4_fc1_ebtimeF_dtTrue_FullPre_0/checkpoint.pth
+===== V2 pretrain LightTS ETTm1 =====
+ckpt2: /root/autodl-tmp/exp_gnss/weights/anomaly_detection_full_pre_LightTS_ETTm1_LightTS_PSM_ftM_sl96_ll48_pl96_dm64_nh8_el2_dl1_df128_expand2_dc4_fc1_ebtimeF_dtTrue_FullPre_0/checkpoint.pth
+===== V2 finetune LightTS ds1 (onset=125) =====
+{'n_frames': 22660, 'roc_auc': 0.6689, 'pr_auc': 0.8524, 'tpr@fpr1': 0.0693, 'tpr@fpr5': 0.1818, 'f1': 0.0422, 'mcc': 0.0702, 'bal_acc': 0.5102, 'tpr': np.float64(0.0216), 'fpr': np.float64(0.0012), 'add_s': 0.66, 'hit': 1, 'threshold': 0.7405}
+===== V2 finetune LightTS ds2 (onset=110) =====
+{'n_frames': 22428, 'roc_auc': 0.6003, 'pr_auc': 0.8481, 'tpr@fpr1': 0.1094, 'tpr@fpr5': 0.1683, 'f1': 0.1129, 'mcc': 0.1169, 'bal_acc': 0.5294, 'tpr': np.float64(0.0599), 'fpr': np.float64(0.001), 'add_s': 0.18, 'hit': 1, 'threshold': 0.7405}
+===== V2 finetune LightTS ds3 (onset=120) =====
+{'n_frames': 22464, 'roc_auc': 0.5921, 'pr_auc': 0.8165, 'tpr@fpr1': 0.0407, 'tpr@fpr5': 0.1123, 'f1': 0.0304, 'mcc': 0.0557, 'bal_acc': 0.507, 'tpr': np.float64(0.0155), 'fpr': np.float64(0.0014), 'add_s': 64.94, 'hit': 1, 'threshold': 0.7405}
+===== V2 finetune LightTS ds4 (onset=114) =====
+{'n_frames': 22481, 'roc_auc': 0.6862, 'pr_auc': 0.8786, 'tpr@fpr1': 0.1056, 'tpr@fpr5': 0.2267, 'f1': 0.0876, 'mcc': 0.1016, 'bal_acc': 0.5222, 'tpr': np.float64(0.0459), 'fpr': np.float64(0.0015), 'add_s': 11.9, 'hit': 1, 'threshold': 0.7405}
+===== V2 finetune LightTS ds5 (onset=102) =====
+{'n_frames': 20478, 'roc_auc': 0.459, 'pr_auc': 0.7602, 'tpr@fpr1': 0.0134, 'tpr@fpr5': 0.0516, 'f1': 0.0071, 'mcc': 0.0055, 'bal_acc': 0.5004, 'tpr': np.float64(0.0035), 'fpr': np.float64(0.0028), 'add_s': 86.64, 'hit': 1, 'threshold': 0.8123}
+===== V2 finetune LightTS ds6 (onset=105) =====
+{'n_frames': 20487, 'roc_auc': 0.4351, 'pr_auc': 0.7273, 'tpr@fpr1': 0.0054, 'tpr@fpr5': 0.0278, 'f1': 0.0046, 'mcc': -0.0034, 'bal_acc': 0.4998, 'tpr': np.float64(0.0023), 'fpr': np.float64(0.0027), 'add_s': 'inf', 'hit': 0, 'threshold': 0.8123}
+===== V2 finetune LightTS ds7 (onset=110) =====
+{'n_frames': 23076, 'roc_auc': 0.6414, 'pr_auc': 0.8631, 'tpr@fpr1': 0.0694, 'tpr@fpr5': 0.163, 'f1': 0.0784, 'mcc': 0.0849, 'bal_acc': 0.5183, 'tpr': np.float64(0.0408), 'fpr': np.float64(0.0043), 'add_s': 214.24, 'hit': 1, 'threshold': 0.7405}
+===== V2 finetune LightTS ds8 (onset=110) =====
+{'n_frames': 23074, 'roc_auc': 0.6599, 'pr_auc': 0.87, 'tpr@fpr1': 0.0636, 'tpr@fpr5': 0.1732, 'f1': 0.0623, 'mcc': 0.0753, 'bal_acc': 0.5144, 'tpr': np.float64(0.0322), 'fpr': np.float64(0.0033), 'add_s': 119.26, 'hit': 1, 'threshold': 0.7405}
+===== V2 pretrain DLinear ETTh1 =====
+ckpt1: /root/autodl-tmp/exp_gnss/weights/anomaly_detection_full_pre_DLinear_ETTh1_DLinear_PSM_ftM_sl96_ll48_pl96_dm64_nh8_el2_dl1_df128_expand2_dc4_fc1_ebtimeF_dtTrue_FullPre_0/checkpoint.pth
+===== V2 pretrain DLinear ETTm1 =====
+ckpt2: /root/autodl-tmp/exp_gnss/weights/anomaly_detection_full_pre_DLinear_ETTm1_DLinear_PSM_ftM_sl96_ll48_pl96_dm64_nh8_el2_dl1_df128_expand2_dc4_fc1_ebtimeF_dtTrue_FullPre_0/checkpoint.pth
+===== V2 finetune DLinear ds1 (onset=125) =====
+{'n_frames': 22660, 'roc_auc': 0.9991, 'pr_auc': 0.9998, 'tpr@fpr1': 0.998, 'tpr@fpr5': 0.9982, 'f1': 0.0, 'mcc': 0.0, 'bal_acc': 0.5, 'tpr': np.float64(0.0), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 0.2248}
+===== V2 finetune DLinear ds2 (onset=110) =====
+{'n_frames': 22428, 'roc_auc': 0.9996, 'pr_auc': 0.9999, 'tpr@fpr1': 0.9991, 'tpr@fpr5': 0.9992, 'f1': 0.0, 'mcc': 0.0, 'bal_acc': 0.5, 'tpr': np.float64(0.0), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 0.2248}
+===== V2 finetune DLinear ds3 (onset=120) =====
+{'n_frames': 22464, 'roc_auc': 0.9945, 'pr_auc': 0.9983, 'tpr@fpr1': 0.9325, 'tpr@fpr5': 0.9796, 'f1': 0.0, 'mcc': 0.0, 'bal_acc': 0.5, 'tpr': np.float64(0.0), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 0.2248}
+===== V2 finetune DLinear ds4 (onset=114) =====
+{'n_frames': 22481, 'roc_auc': 0.9999, 'pr_auc': 1.0, 'tpr@fpr1': 0.999, 'tpr@fpr5': 0.9995, 'f1': 0.0, 'mcc': 0.0, 'bal_acc': 0.5, 'tpr': np.float64(0.0), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 0.2248}
+===== V2 finetune DLinear ds5 (onset=102) =====
+{'n_frames': 20478, 'roc_auc': 0.9992, 'pr_auc': 0.9998, 'tpr@fpr1': 0.9982, 'tpr@fpr5': 0.9987, 'f1': 0.0, 'mcc': 0.0, 'bal_acc': 0.5, 'tpr': np.float64(0.0), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 0.2547}
+===== V2 finetune DLinear ds6 (onset=105) =====
+{'n_frames': 20487, 'roc_auc': 0.9871, 'pr_auc': 0.9954, 'tpr@fpr1': 0.6955, 'tpr@fpr5': 0.9663, 'f1': 0.0, 'mcc': 0.0, 'bal_acc': 0.5, 'tpr': np.float64(0.0), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 0.2547}
+===== V2 finetune DLinear ds7 (onset=110) =====
+{'n_frames': 23076, 'roc_auc': 0.9703, 'pr_auc': 0.9921, 'tpr@fpr1': 0.8244, 'tpr@fpr5': 0.8853, 'f1': 0.0, 'mcc': 0.0, 'bal_acc': 0.5, 'tpr': np.float64(0.0), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 0.2248}
+===== V2 finetune DLinear ds8 (onset=110) =====
+{'n_frames': 23074, 'roc_auc': 0.9882, 'pr_auc': 0.997, 'tpr@fpr1': 0.9208, 'tpr@fpr5': 0.9636, 'f1': 0.0, 'mcc': 0.0, 'bal_acc': 0.5, 'tpr': np.float64(0.0), 'fpr': np.float64(0.0), 'add_s': 'inf', 'hit': 0, 'threshold': 0.2248}
+########## FULL SUMMARY ##########
+FULL_DONE
