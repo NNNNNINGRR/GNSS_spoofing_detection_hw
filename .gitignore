@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+
+# 运行产物
+checkpoints/
+results/
+test_results/
+logs/
+
+# 数据/大文件/敏感文件
+dataset/
+*.npy
+*.csv
+*.tar.gz
+*.pdf
+.DS_Store
+*.key
+*_key
