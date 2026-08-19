@@ -7,6 +7,8 @@
   红点  = 实际告警帧（分数 ≥ 清洁标定 FPR1% 阈值）
   虚线  = 三档清洁标定阈值（0.1%/1%/5%）
   标注  = 首报延迟 ADD（连续 3 帧告警）与场景内实际 FPR / TPR
+
+All text in English (cloud servers may lack CJK fonts).
 """
 import argparse
 import json
@@ -18,13 +20,11 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-plt.rcParams["font.sans-serif"] = ["Microsoft YaHei", "SimHei"]
-plt.rcParams["axes.unicode_minus"] = False
-
 SCEN_DESC = {
-    "ds1": "简单·静态(高功率)", "ds2": "中等·静态(匹配功率)", "ds3": "中等·静态(位置推送0.4dB)",
-    "ds4": "简单·动态", "ds5": "中等·动态", "ds6": "sophisticated·静态",
-    "ds7": "时间调整·静态", "ds8": "时间调整·静态",
+    "ds1": "simple, static (high power)", "ds2": "intermediate, static (matched power)",
+    "ds3": "intermediate, static (position push 0.4dB)", "ds4": "simple, dynamic",
+    "ds5": "intermediate, dynamic", "ds6": "sophisticated, static",
+    "ds7": "time-adjust, static", "ds8": "time-adjust, static",
 }
 
 
@@ -71,27 +71,30 @@ def main():
         t = epoch[s:e] - epoch[s]
         sc = np.minimum(score[s:e], t_hi)
         onset = b["onset_s"]
-        ax.fill_between(t, t_lo, t_hi, where=(lab[s:e] == 1), color="green", alpha=0.15, label="欺骗真值")
+        ax.fill_between(t, t_lo, t_hi, where=(lab[s:e] == 1), color="green", alpha=0.15,
+                        label="spoof ground truth")
         ax.plot(t, sc, color="0.45", lw=0.4, zorder=1)
         m = alarm[s:e] & (t >= onset - 5)
-        ax.scatter(t[m], sc[m], s=1.2, color="red", zorder=3, label="告警帧(@FPR1%阈值)")
+        ax.scatter(t[m], sc[m], s=1.2, color="red", zorder=3, label="alarm frames (@FPR1% thr)")
         for lvl, th, c in zip(["0.1%", "1%", "5%"], thr, ["k", "crimson", "orange"]):
             y = min(float(th), t_hi)
-            ax.axhline(y, ls="--", lw=0.8, color=c, label=f"阈值@{lvl}={th:.3g}")
+            ax.axhline(y, ls="--", lw=0.8, color=c, label=f"thr@{lvl}={th:.3g}")
         ax.axvline(onset, color="green", ls="-", lw=1.0)
         add = first_alarm(t, alarm[s:e], onset)
         rfpr = alarm[s:e][t < onset].mean() if (t < onset).any() else np.nan
         tpr = alarm[s:e][t >= onset].mean()
-        addtxt = f"ADD={add:.2f}s" if np.isfinite(add) else "ADD=未命中"
-        ax.set_title(f"{b['scenario']}（{SCEN_DESC.get(b['scenario'],'')}）  "
-                     f"TPR={tpr:.3f}  实际FPR={rfpr:.3f}  {addtxt}", fontsize=9)
-        ax.set_xlabel("时间 (s)", fontsize=8)
+        addtxt = f"ADD={add:.2f}s" if np.isfinite(add) else "ADD=miss"
+        ax.set_title(f"{b['scenario']} ({SCEN_DESC.get(b['scenario'], '')})  "
+                     f"TPR={tpr:.3f}  real-FPR={rfpr:.3f}  {addtxt}", fontsize=9)
+        ax.set_xlabel("Time (s)", fontsize=8)
+        ax.set_ylabel("anomaly score", fontsize=8)
         ax.set_ylim(t_lo, t_hi)
         if i == 0:
             ax.legend(fontsize=6, loc="upper left", ncol=2)
     for j in range(len(blocks), nrow * ncol):
         axes[j // ncol][j % ncol].axis("off")
-    fig.suptitle(f"{args.name}：测试集逐场景检测结果（cs+cd 清洁训练，窗口=逐帧）", fontsize=12)
+    fig.suptitle(f"{args.name}: per-scenario detection on test set "
+                 f"(trained on cs+cd clean only, per-frame)", fontsize=12)
     fig.tight_layout(rect=[0, 0, 1, 0.97])
     fig.savefig(args.out, dpi=130)
     plt.close(fig)
