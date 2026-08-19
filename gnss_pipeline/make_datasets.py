@@ -17,6 +17,20 @@ from common import CLEAN_SCENARIOS, SCENARIOS, SPOOF_SCENARIOS
 # 主特征：Paper A 7 特征（基础 4 指标为 ±0.5 chip 口径）+ 双 delta
 METRIC_COLS = ["m_ratio", "m_delta", "m_elp", "m_symdiff", "m_manfredini", "m_dd", "received_power"]
 FEATURE_COLS = METRIC_COLS + ["CN0"]
+# v3.0 旧口径（基础指标 0.25 chip、无 m_dd）= 7 维，用于新旧特征集对照验证
+METRIC_COLS_V30 = ["m_ratio", "m_delta", "m_elp", "m_symdiff", "m_manfredini", "received_power"]
+FEATURE_COLS_V30 = METRIC_COLS_V30 + ["CN0"]
+
+
+def detect_feature_set(metrics_dir):
+    """按指标 CSV 实际列自动选特征集：有 m_dd → v3.1（8 维）；否则 v3.0（7 维）。"""
+    for s in SCENARIOS:
+        for ch in range(8):
+            p = os.path.join(metrics_dir, f"{s}_ch{ch}.csv")
+            if os.path.exists(p):
+                cols = pd.read_csv(p, nrows=1).columns.tolist()
+                return (FEATURE_COLS, "v3.1") if "m_dd" in cols else (FEATURE_COLS_V30, "v3.0")
+    raise SystemExit("找不到任何指标 CSV")
 
 # 各欺骗场景攻击信号起始时刻（秒，相对本场景 .bin 文件起点）
 # 以 TEXBAT 原始文档与论文为准（本地数据仅交叉验证，详见 docs/06_TEXBAT_攻击起始时间_来源与交叉验证.md）：
@@ -266,6 +280,10 @@ def main():
     ap.add_argument("--anomaly_only", action="store_true",
                     help="只生成异常数据集（跳过分类/传统，用于逐场景快速制作）")
     args = ap.parse_args()
+
+    global FEATURE_COLS
+    FEATURE_COLS, feat_ver = detect_feature_set(args.scenarios_dir)
+    print(f"特征集: {feat_ver}（{len(FEATURE_COLS)} 维: {FEATURE_COLS}）")
 
     if args.anomaly_train == "cs+cd":
         test = SPOOF_SCENARIOS if args.anomaly_test == "all" else args.anomaly_test.split(",")
