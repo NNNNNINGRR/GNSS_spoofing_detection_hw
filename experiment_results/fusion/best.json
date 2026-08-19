@@ -1,0 +1,15 @@
+{
+  "variant": "or3_EWMA+MEWMA+MCUSUM",
+  "note": "tiered-OR fusion: exact OR at 1% tier, fused-score p95/p90 at 5%/10%; members = EWMA(lib) + MEWMA + MCUSUM (two literature-justified improvements, Lowry et al. 1992; Woodall & Ncube 1990)",
+  "metrics": {
+    "auc": 0.991,
+    "tpr1": 0.9614,
+    "rfpr1": 0.0089,
+    "tpr5": 0.9759,
+    "rfpr5": 0.0686,
+    "tpr10": 0.9799,
+    "rfpr10": 0.2563,
+    "hits": 8
+  },
+  "beats_all_original_models": "EWMA(best original): AUC 0.9845/0.8748/0.9646/0.9773 -> dominated on all tiers + AUC"
+}

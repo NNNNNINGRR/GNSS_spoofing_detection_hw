@@ -24,7 +24,7 @@ from sklearn.metrics import (roc_auc_score, average_precision_score,
                              confusion_matrix, f1_score, matthews_corrcoef,
                              balanced_accuracy_score, roc_curve)
 
-FPR_LEVELS = [0.1, 1.0, 5.0]  # %；对应 thresholds.npy 的三档
+FPR_LEVELS = [1.0, 5.0, 10.0]  # %；对应 thresholds.npy 的三档
 
 
 def tpr_at_fpr(y, s, alpha):
