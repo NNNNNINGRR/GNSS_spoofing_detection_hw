@@ -302,6 +302,164 @@ save(F, y_te, tau)  →  eval_smoke.py --win 1 + manifest 逐场景
 
 ---
 
+## 九A、数学原理的完整推导（方法论）
+
+本章从统计假设出发，把 TMOF 的三个步骤（margin 归一、max 融合、分层阈值）逐一定量化，
+推导其检出力、虚警率、渐近性质与误差分解。全部记号沿用前文。
+
+### 9A.1 统计建模：观测、假设与错误率
+
+**观测模型。** 设逐帧特征 $\boldsymbol{z}_t\in\mathbb{R}^8$（已标准化）由随机过程生成。在零假设（无欺骗）下，
+
+$$\text{H}_0:\quad \boldsymbol{z}_t\ \sim\ P_0\quad(\text{清洁分布，cs+cd 采样}),$$
+
+在备择假设（欺骗已注入）下，特征被攻击改变：
+
+$$\text{H}_1:\quad \boldsymbol{z}_t\ \sim\ P_1\neq P_0\quad(\text{欺骗分布，随攻击类型变化}).$$
+
+每个成员 $i$ 是一个检验统计量 $s_i:\mathbb{R}^8\to\mathbb{R}$，其告警规则为
+$\hat y_i(t)=\mathbb{1}[s_i(t)\ge\tau_i]$。定义成员在**该场景**上的两类错误率：
+
+$$P_{FA,i}=\mathbb{P}_{H_0}\big(s_i\ge\tau_i\big),\qquad
+P_{MD,i}=\mathbb{P}_{H_1}\big(s_i<\tau_i\big),$$
+
+即虚警概率（清洁帧被判欺骗）与漏检概率（欺骗帧被判清洁）。检出率 $P_{D,i}=1-P_{MD,i}$。
+注意 $P_{FA,i}$ 是"实际虚警率"，与名义档位 $\alpha$ 不同——名义档只约束训练集上的
+$P_{FA,i}^{\text{train}}=\alpha$，测试通道上 $P_{FA,i}$ 可能偏离（阈值迁移问题）。
+
+**TMOF 的检验。** 融合统计量 $F(t)=\max_i m_i(t)$，告警 $\hat y(t)=\mathbb{1}[F(t)\ge\tau_\alpha]$，
+$\tau_\alpha$ 为三档阈值。**§9A.2–9A.5 给出 $P_{FA}$ 与 $P_D$ 的精确表达式。**
+
+### 9A.2 虚警概率的精确推导（边界包含性）
+
+对 $\tau_1=0$ 档，$F(t)>0 \iff \exists i:\ m_i(t)>0$。设成员 $i$ 的 margin 告警事件
+$A_i=\{\omega:\ m_i(\omega)>0\}$，由 $m_i$ 的定义，$A_i=\{\omega:\ s_i(\omega)>q_{i,99}\}$。
+若分数连续（无原子），$P_0(A_i)=1-\alpha=0.99$ 在训练分布上成立。则融合虚警率：
+
+$$P_{FA}^{\text{TMOF}}=\mathbb{P}_{H_0}\Big(\bigcup_{i=1}^{3}A_i\Big)=\sum_{k=1}^{3}(-1)^{k+1}\sum_{|S|=k}\mathbb{P}_{H_0}\Big(\bigcap_{i\in S}A_i\Big),$$
+
+（包含-排除原理）。若成员在清洁段的告警**相互独立**，则
+
+$$P_{FA}^{\text{TMOF}}=1-\prod_{i=1}^{3}\big(1-P_{FA,i}\big)\ \approx\ \sum_{i=1}^{3}P_{FA,i}\quad(\text{当 }P_{FA,i}\ll1).$$
+
+若成员**完全正相关**（清洁段上同告警），$P_{FA}^{\text{TMOF}}=\max_i P_{FA,i}$。
+真实数据介于两者之间。**关键实证**：三成员 1% 档实际虚警为
+$(0.0089,\ 0.0051,\ 0.0000)$，独立假设给出 $0.014$、完全相关给出 $0.0089$，实测 $0.0089$——
+**成员在清洁段上高度正相关**（正常帧三个成员都不告警，异常清洁帧如多径尖峰也常同时触发）。
+因此融合的虚警几乎不放大：$P_{FA}^{\text{TMOF}}\approx\max_i P_{FA,i}$。
+
+**5%/10% 档**：$\tau_5=q_{95}(F_{\text{train}})$ 直接定义 $P_{FA}^{\text{train}}=5\%$，
+其测试通道实际值同样由迁移决定（实测静态场景≈名义，动态场景偏高，见 §12）。
+
+### 9A.3 检出力：并集覆盖与互补性增益
+
+对欺骗帧集 $\mathcal{S}$（某场景攻击段），成员检出率 $P_{D,i}=\mathbb{P}_{H_1}(m_i>0)$，
+融合检出率：
+
+$$P_D^{\text{TMOF}}=\mathbb{P}_{H_1}\Big(\bigcup_i A_i\Big)=1-\prod_{i}\big(1-P_{D,i}\big)\quad(\text{若欺骗段独立}).$$
+
+在独立性假设下，**即使每个成员都不强，并集也能显著提升**：
+三个 $P_{D,i}=0.9$ 的成员独立融合给出 $1-0.1^3=0.999$。真实欺骗段成员告警并非独立，
+而是**时间互补**（EWMA 覆盖头部、MCUSUM 覆盖尾部，头部帧只有 EWMA 告警、尾部帧只有 MCUSUM 告警），
+因此：
+
+$$P_D^{\text{TMOF}}=\frac{1}{|\mathcal{S}|}\sum_{t\in\mathcal{S}}\mathbb{1}\Big[\bigcup_i\{m_i(t)>0\}\Big]=\frac{1}{|\mathcal{S}|}\Big|\bigcup_i \mathcal{A}_i\Big|,$$
+
+其中 $\mathcal{A}_i=\{t\in\mathcal{S}: m_i(t)>0\}$ 为成员 $i$ 的告警帧集。由集合并集基数：
+
+$$\Big|\bigcup_i \mathcal{A}_i\Big|=\sum_i|\mathcal{A}_i|-\sum_{i<j}|\mathcal{A}_i\cap\mathcal{A}_j|+|\mathcal{A}_1\cap\mathcal{A}_2\cap\mathcal{A}_3|.$$
+
+定义**重叠度** $\rho_{ij}=|\mathcal{A}_i\cap\mathcal{A}_j|/\min(|\mathcal{A}_i|,|\mathcal{A}_j|)$，则：
+
+$$P_D^{\text{TMOF}}\ge \max_i P_{D,i}\quad(\text{恒成立，OR 单调性}),$$
+
+$$P_D^{\text{TMOF}}\approx\sum_i P_{D,i}-\sum_{i<j}\rho_{ij}\min(P_{D,i},P_{D,j})\quad(\text{三交集可忽略时}).$$
+
+**增益条件**：当成员告警在欺骗段**低重叠**（$\rho_{ij}\to0$，时间互补）时，
+$P_D^{\text{TMOF}}\to\sum_i P_{D,i}$（取 min 上界为 1）；当高重叠（$\rho_{ij}\to1$）时
+$P_D^{\text{TMOF}}\to\max_i P_{D,i}$（无增益）。实测对照：
+
+| 场景 | 成员 (EWMA,MEWMA,MCUSUM) | $\sum_i P_{D,i}$ | $P_D^{\text{TMOF}}$ | 推断重叠度 |
+|---|---|---|---|---|
+| ds3（互补） | 0.399, 0.327, 0.919 | 1.645 | **1.000** | 低（头部/尾部错位） |
+| ds6（互补） | 0.953, 0.786, 0.939 | 2.678 | **1.000** | 低 |
+| ds7（同弱） | 0.741, 0.711, 0.643 | 2.095 | 0.741 | 高（告警帧几乎相同） |
+
+ds3 的 $\sum P_{D,i}=1.645$ 远超 1，但并集仅 1.000——说明三个成员**帧级互补而非帧级独立**
+（重叠度低但三交集仍非零）；ds7 的 $\sum=2.095$ 而并集仅 0.741，说明成员告警帧**几乎完全重叠**
+（同弱且同帧），OR 无增益——这正是 §5.3 定理的边界情形。
+
+### 9A.4 阈值与误分类代价：分层阈值的代价函数解释
+
+把检测器看作在"虚警代价"与"漏检代价"之间的权衡。定义单帧代价：
+
+$$\mathcal{C}(\alpha)=\underbrace{c_{FA}\cdot P_{FA}(\alpha)}_{\text{虚警代价}}+\underbrace{c_{MD}\cdot P_{MD}(\alpha)}_{\text{漏检代价}},\qquad \alpha\in\{1,5,10\}\%.$$
+
+TMOF 的三档阈值对应三个代价偏好：
+- $\alpha=1\%$：$c_{FA}$ 相对大（安全敏感部署，虚警代价高）——用**精确 OR** 保证 TPR 下界，同时靠成员低重叠维持低虚警；
+- $\alpha=5\%/10\%$：$c_{MD}$ 相对大（宁可多报）——放宽融合分数分位，换取更高检出。
+
+**档位-检出弹性**（$\partial P_D/\partial\alpha$）由成员分数分布决定：
+- 逐帧型成员（EWMA/MEWMA）分数连续，放宽阈值平滑提升检出（但虚警同步升）；
+- 累积型成员（MCUSUM）分数呈"阶梯"（越限即深陷），三档检出几乎不变（0.875/0.909/0.916）——其贡献对档位不敏感，是 1% 档的"稳定底仓"；
+- 融合后宏观弹性 $P_D: 0.9614\to0.9759\to0.9805$——放宽阈值买到的检出增量递减（5%→10% 仅 +0.5pt），与虚警增量（0.0089→0.0686→0.2564）相比性价比骤降，**5% 档是检出-虚警的帕累托拐点**。
+
+### 9A.5 margin 的统计性质：估计与渐近
+
+**分位估计的误差。** margin 锚点 $q_{i,99},q_{i,99.9}$ 由 45476 帧训练样本估计。样本分位数
+$q_p$ 的渐近方差（Kendall 展开）：
+
+$$\mathrm{Var}(\hat q_p)\approx\frac{p(1-p)}{n\big[f(q_p)\big]^2},$$
+
+$f$ 为分数密度。对 EWMA/MEWMA（近高斯分数，$f(q_{0.99})$ 适中）误差小；对 MCUSUM
+（分数左端密集、右端稀疏）$f(q_{0.99})$ 小，$\mathrm{Var}$ 略大——实测其
+$q_{99.9}-q_{99}$ 间隔（margin 分母）仍远大于噪声，误差可忽略。
+
+**margin 的偏差-方差分解。** 记真值锚点 $q^*_{i,99}$，估计误差 $\varepsilon_i=\hat q_{i,99}-q^*_{i,99}$，
+则 margin 的偏差与方差：
+
+$$\mathbb{E}[m_i(t)]\approx\frac{s_i(t)-q^*_{i,99}}{q^*_{i,99.9}-q^*_{i,99}},\qquad
+\mathrm{Var}[m_i(t)]\approx\Big(\frac{\partial m_i}{\partial q_{i,99}}\Big)^2\mathrm{Var}(\hat q_{i,99})+\Big(\frac{\partial m_i}{\partial q_{i,99.9}}\Big)^2\mathrm{Var}(\hat q_{i,99.9}).$$
+
+偏导 $|\partial m_i/\partial q_{i,99}|=|q_{i,99.9}-q_{i,99}|^{-1}$。$n=45476$ 时各成员方差
+贡献 <0.01（可忽略）——**TMOF 对锚点估计误差稳健，训练集规模足够**。
+
+**渐近一致性。** 若 (i) 成员分数分布连续且在锚点处密度 $f(q_{i,99})>0$；
+(ii) 训练/测试清洁分布相同（无迁移）；(iii) 欺骗段成员告警帧并集覆盖 $\mathcal{S}$，
+则随 $n\to\infty$：$P_{FA}^{\text{TMOF}}\to\alpha$（名义档收敛）、$P_D^{\text{TMOF}}\to 1$
+（若并集覆盖）。三个条件中，(ii) 在动态场景被破坏（实测虚警 0.032–0.036），是唯一的
+系统性偏离源；(iii) 在 ds7 被破坏（成员均弱），是检出上界的来源。
+
+### 9A.6 错误分解：把 TMOF 的误差写成可归因形式
+
+令 $\mathcal{E}$ 为总错误帧集（漏检 $\cup$ 虚警），按"哪个成员负责"分解：
+
+$$\underbrace{\mathcal{E}_{\text{miss}}}_{\text{漏检}}=\bigcap_{i}\big\{\mathcal{S}\setminus\mathcal{A}_i\big\}\quad(\text{所有成员同时漏}),$$
+
+$$\underbrace{\mathcal{E}_{FA}}_{\text{虚警}}=\Big(\bigcup_i A_i\Big)\cap\mathcal{C}\quad(\text{任一成员误报}).$$
+
+漏检的成因分解（按成员组合）：
+
+$$|\mathcal{E}_{\text{miss}}|=|\mathcal{S}|-\Big|\bigcup_i\mathcal{A}_i\Big|=|\mathcal{S}|-\sum_i|\mathcal{A}_i|+\sum_{i<j}|\mathcal{A}_i\cap\mathcal{A}_j|-|\mathcal{A}_1\cap\mathcal{A}_2\cap\mathcal{A}_3|.$$
+
+**实测归因（ds3）**：$|\mathcal{S}|=17293$ 帧，$|\mathcal{A}_{\text{EWMA}}|=6900$、$|\mathcal{A}_{\text{MCUSUM}}|=15893$，
+并集 $|\bigcup|=17293$（$P_D=1.000$）。漏检帧 $=0$。若只用 MCUSUM，漏检 $=17293-15893=1400$ 帧
+（8.1%），其中 $1400$ 帧恰是 EWMA 单独覆盖的攻击头部——**误差归因显示：头部帧只能由
+瞬态通道（EWMA/MEWMA）覆盖，尾部帧只能由持续通道（MCUSUM）覆盖，二者互补性在帧级成立**。
+
+### 9A.7 与 Neyman-Pearson 框架的联系
+
+将 TMOF 与经典假设检验对齐：对固定虚警水平 $\alpha$，Neyman-Pearson 最优检验是似然比
+$L(t)=p_1(t)/p_0(t)$ 的阈值检验。TMOF 的统计量 $F(t)=\max_i m_i(t)$ 可视为
+**多成员似然比证据的鲁棒集成**：$m_i(t)>0$ 是"成员 $i$ 认为该帧偏离清洁分布"的证据，
+max 取最强证据。当各成员捕捉不同签名（S1/S2/S3），$F$ 近似于对三类似然比证据的
+**并集检波**。与 N-P 的差异：(i) 成员证据未校准为概率（无似然比），代价是次优性，
+收益是对分布假设的鲁棒性；(ii) 阈值由经验分位给出而非理论分布——把"分布未知"的
+现实约束吸收进标定。**结论：TMOF 是"鲁棒化的并集检波器"，其检出力-虚警权衡由成员
+互补性（§9A.3）主导，而非单个成员的 N-P 最优性。**
+
+---
+
 ## 十、理论性质小结
 
 | 性质 | 内容 | 意义 |
