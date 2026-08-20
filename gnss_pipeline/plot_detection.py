@@ -57,7 +57,7 @@ def main():
 
     n = min(len(score), len(lab), len(epoch))
     score, lab, epoch = score[:n], lab[:n], epoch[:n]
-    alarm = score >= thr[1]          # 清洁标定 FPR1% 工作点
+    alarm = score >= thr[0]          # 清洁标定 FPR1% 工作点（thresholds.npy 顺序：1%/5%/10%）
     t_lo = np.percentile(score, 0.5)
     t_hi = min(float(thr[0]) * 1.3, np.percentile(score, 99.9) * 1.1)  # 限幅防长尾压扁曲线
 
@@ -76,7 +76,7 @@ def main():
         ax.plot(t, sc, color="0.45", lw=0.4, zorder=1)
         m = alarm[s:e] & (t >= onset - 5)
         ax.scatter(t[m], sc[m], s=1.2, color="red", zorder=3, label="alarm frames (@FPR1% thr)")
-        for lvl, th, c in zip(["0.1%", "1%", "5%"], thr, ["k", "crimson", "orange"]):
+        for lvl, th, c in zip(["1%", "5%", "10%"], thr, ["k", "crimson", "orange"]):
             y = min(float(th), t_hi)
             ax.axhline(y, ls="--", lw=0.8, color=c, label=f"thr@{lvl}={th:.3g}")
         ax.axvline(onset, color="green", ls="-", lw=1.0)
